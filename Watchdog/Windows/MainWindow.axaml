@@ -1,0 +1,115 @@
+<Window xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="500"
+    x:Class="Watchdog.MainWindow"
+    Title="Inżynieria Cyberbezpieczeństwa - aplikacja Watchdog"
+    Width="700" MinWidth="700" MaxWidth="700" Height="500" MinHeight="500"
+>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"
+            Margin="0, 5, 0, 0">
+            Watchdog
+        </TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0, 0, 0, 5">
+            Jakub Bielecki, Michał Boguszewski, Adrian Cieśla
+        </TextBlock>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" CornerRadius="4"
+            Margin="10, 0, 10, 0">
+            <TabControl>
+                <TabItem Header="Remote Code Execution">
+                    <StackPanel HorizontalAlignment="Stretch" Spacing="10">
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Ataki "Remote Code Execution" wykorzystują luki w oprogramowaniu lub walidacji, aby wstrzyknąć kod, który zostanie wykonany na podatnym urządzeniu.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Zaimplementowany atak zostanie wykonany na serwerze napisanym w języku Java z użyciem technologii Spring Boot oraz pakietu Log4J. Do części frontendowej - serwisu napisanego w języku React - haker prześle sformatowany ciąg znaków. Po jego odebraniu serwer pobierze oraz wykona szkodliwą klasę Javy.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Celem ataku jest wydobycie zmiennych środowiskowych serwera, np. connection string-ów do bazy danych lub kluczy do Blob Storage - serwisu do przechowywania plików, którymi mogą być np. dokumenty dla klientów.
+                        </TextBlock>
+                        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="0.5" />
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                Atak używa scenariusza 
+                            </TextBlock>
+                            <TextBlock FontFamily="Monospace" VerticalAlignment="Center">
+                                rce
+                            </TextBlock>
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                włączanego przez program "Scenarzysta".
+                            </TextBlock>
+                            <Button Command="{Binding OnRCEStart}">
+                                Rozpocznij atak
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Buffer Overflow">
+                    <StackPanel HorizontalAlignment="Stretch" Spacing="10">
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            EternalBlue to exploit komputerowy odkryty na początku 2017 roku. Celował w podatność systemu Windows obecną w implementacji protokołu SMB. Wskutek wadliwej implementacji protokołu SMBv1, możliwe jest, aby atakujący wysyłał spreparowane pakiety do atakowanego systemu, wpisanie danych paczki do pamięci z kodem oraz wykonanie tak wprowadzonego fragmentu programu bez konieczności interakcji użytkownika.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Przedstawiony atak polega na przejęciu dostępu do systemu z uprawnieniami SYSTEM, czyli najwyższym poziomem uprawnień w systemie Windows, a następnie wykonaniu przykładowej akcji. Tutaj będzie to utworzenie folderu na hakowanej maszynie.
+                        </TextBlock>
+                        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="0.5" />
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                Atak używa scenariusza 
+                            </TextBlock>
+                            <TextBlock FontFamily="Monospace" VerticalAlignment="Center">
+                                eternalblue
+                            </TextBlock>
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                włączanego przez "Scenarzystę".
+                            </TextBlock>
+                            <Button Command="{Binding OnBufferStart}">
+                                Rozpocznij atak
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="SQL Injection">
+                    <StackPanel HorizontalAlignment="Stretch" Spacing="10">
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Ataki "SQL Injection" wykorzystują naiwnie napisane przez programistów fragmenty kodu uruchamiające komendy SQL za pomocą konkatenacji części zapytania do bazy danych z otrzymanym inputem od użytkownika.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Zaimplementowany atak zostanie wykonany na aplikacji łączącej się z bazą danych polityków. Aplikacja poprosi użytkownika o wpisanie imienia polityka, o którym informacje chciałby uzyskać. Ten z kolei wpisze "imię" w mocno niestandardowy sposób modyfikujący w niepożądany sposób zapytanie, które aplikacja prześle do bazy danych.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" IsVisible="{Binding ShowDescriptions}">
+                            Celem ataku jest popsucie działania aplikacji poprzez usunięcie wszystkich rekordów z tabeli w bazie danych.
+                        </TextBlock>
+                        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="0.5" />
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                Atak używa scenariusza 
+                            </TextBlock>
+                            <TextBlock FontFamily="Monospace" VerticalAlignment="Center">
+                                sql
+                            </TextBlock>
+                            <TextBlock FontWeight="Bold" VerticalAlignment="Center">
+                                włączanego przez program "Scenarzysta".
+                            </TextBlock>
+                            <Button Command="{Binding OnSQLStart}">
+                                Rozpocznij atak
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="5" Margin="10,10,10,10">
+            <CheckBox IsChecked="{Binding ShowDescriptions}" IsThreeState="False" VerticalAlignment="Center"/>
+            <Label VerticalAlignment="Center">Pokaż szczegółowe opisy</Label>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d" d:DesignWidth="592" d:DesignHeight="500"
+  x:Class="Watchdog.BufferWindow"
+  Title="Buffer Overflow"
+  Width="592" MinWidth="592" MaxWidth="420" Height="500" MinHeight="500" MaxHeight="500"
+>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition Height="15" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="50" />
+      <RowDefinition Height="20" />
+    </Grid.RowDefinitions>
+    <TextBlock Margin="10, 0, 10, 0" Grid.Row="1" FontWeight="Bold" FontSize="10">
+      Wyjście programu Metasploit:
+    </TextBlock>
+    <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"
+      Margin="0, 5, 0, 0">
+      Buffer Overflow
+    </TextBlock>
+    <Border Grid.Row="2" Margin="10, 5, 10, 0" Background="LightGray" CornerRadius="5"
+      VerticalAlignment="Stretch">
+      <ScrollViewer VerticalAlignment="Stretch" Name="ConsoleScroll">
+        <TextBlock FontFamily="Monospace" Margin="5,5,5,5" TextWrapping="Wrap" Name="Console"
+          Text="{Binding Memory}" />
+      </ScrollViewer>
+    </Border>
+    <Grid Grid.Row="3">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="90" />
+      </Grid.ColumnDefinitions>
+      <TextBox Grid.Column="0" Margin="10,10,10,10" Name="Input" IsEnabled="{Binding Initialized}" />
+      <Button Margin="0,0,10,0" Grid.Column="1" IsDefault="True" Name="Execute"
+        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+        IsEnabled="{Binding Initialized}">
+        Wykonaj
+      </Button>
+    </Grid>
+    <TextBlock Margin="10, 0, 10, 0" Grid.Row="4" FontWeight="Bold" FontSize="10">
+      Wpisz !cl, żeby wyczyścić konsolę.
+    </TextBlock>
+  </Grid>
+</Window>

@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+  x:Class="Watchdog.RCEWindow"
+  Title="Remote Code Execution"
+  Width="800" MinWidth="800" MaxWidth="800" Height="500" MinHeight="500" MaxHeight="500"
+>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="50" />
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"
+      Margin="0, 5, 0, 0">
+      Remote Code Execution
+    </TextBlock>
+    <ScrollViewer Grid.Row="1" Name="Scroller">
+      <StackPanel HorizontalAlignment="Stretch" Margin="10, 10, 10, 10" Spacing="5">
+        <StackPanel Spacing="5">
+          <TextBlock TextWrapping="Wrap">
+            1. Zainicjuj scenariusz w programie "Scenarzysta" poleceniem:
+          </TextBlock>
+          <TextBlock FontFamily="Monospace">
+            initiate rce
+          </TextBlock>
+          <Border BorderBrush="Gray" BorderThickness="0.5" />
+        </StackPanel>
+
+        <StackPanel Name="Start" Spacing="5" IsVisible="False">
+          <TextBlock TextWrapping="Wrap">
+            2. Rozpocznij scenariusz w programie "Scenarzysta" poleceniem:
+          </TextBlock>
+          <TextBlock FontFamily="Monospace">
+            start rce
+          </TextBlock>
+          <Border BorderBrush="Gray" BorderThickness="0.5" />
+        </StackPanel>
+
+        
+        <TextBlock Name="Compiling" TextWrapping="Wrap" IsVisible="False">
+          3. Kompiluję klasę Javy...
+        </TextBlock>
+        <TextBlock Name="Compiled" TextWrapping="Wrap" IsVisible="False">
+          OK
+        </TextBlock>
+        <TextBlock Name="NotCompiled" TextWrapping="Wrap" IsVisible="False">
+          Błąd kompilacji - klasa została zmodyfikowana przez użytkownika. Popraw klasę, następnie uruchom atak od nowa.
+        </TextBlock>
+        <TextBlock Name="Compiled2" TextWrapping="Wrap" IsVisible="False">
+          Rozpoczynam pracę serwera oraz programu Netcat...
+        </TextBlock>
+        <TextBlock Name="NetcatRunning" TextWrapping="Wrap" IsVisible="False">
+          OK
+        </TextBlock>
+        <Border Name="NetcatRunning2" BorderBrush="Gray" BorderThickness="0.5" IsVisible="False"/>
+
+        <StackPanel Name="NetcatRunning3" Spacing="5" IsVisible="False">
+          <TextBlock TextWrapping="Wrap">
+            4. Szkodliwy kod jest wystawiony do pobrania. Otwórz w przeglądarce stronę serwisu, który pozwoli na zhakowanie serwera:
+          </TextBlock>
+          <TextBox FontFamily="Monospace" Text="http://10.13.13.103:3000/login/"/>
+          <TextBlock TextWrapping="Wrap">
+            W polu użytkownika wpisz ciąg znaków:
+          </TextBlock>
+          <TextBox FontFamily="Monospace" Text="{Binding Payload}"/>
+          <TextBlock TextWrapping="Wrap">
+            Netcat oczekuje na przychodzące połączenie.
+          </TextBlock>
+          <Border BorderBrush="Gray" BorderThickness="0.5" />
+        </StackPanel>
+
+        <StackPanel Name="Final" IsVisible="False" Spacing="5">
+          <TextBlock>
+            Wyjście:
+          </TextBlock>
+          <ItemsControl Items="{Binding Lines}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Line}" FontFamily="Monospace"
+                  FontWeight="{Binding Weight}" TextWrapping="Wrap" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <TextBlock>
+            Pogrubione zostały zmienne środowiskowe, których pobranie było celem ataku. Atak zakończony sukcesem. 
+          </TextBlock>
+        </StackPanel>
+
+      </StackPanel>
+    </ScrollViewer>
+    <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="10, 10, 10, 10" Spacing="10"
+      Orientation="Horizontal">
+      <Button Name="Next">
+        Dalej >
+      </Button>
+    </StackPanel>
+  </Grid>
+</Window>

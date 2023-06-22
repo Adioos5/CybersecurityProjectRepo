@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="420"
+  x:Class="Watchdog.EntryWindow"
+  Title="Watchdog"
+  Width="600" MinWidth="600" MaxWidth="600" Height="420" MinHeight="420" MaxHeight="420"
+>
+  <Grid Margin="10, 10, 10, 10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="30" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" HorizontalAlignment="Center">
+      <TextBlock TextAlignment="Center">
+        W celu ujednolicenia przebiegu ataków programy "Watchdog" oraz "Scenarzysta"
+są przystosowane do działania w następującej konfiguracji maszyn wirtualnych:
+      </TextBlock>
+    </StackPanel>
+    <Image Grid.Row="1" Source="/Assets/diagram.png" />
+    <Grid Grid.Row="2" VerticalAlignment="Center">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="150" />
+      </Grid.ColumnDefinitions>
+    <TextBlock Grid.Column="0" Name="IpInfo">
+      Sprawdzam adres IP...
+    </TextBlock>
+    <Button Grid.Column="1" HorizontalAlignment="Right" Name="Button" IsEnabled="False">
+      Napraw adres IP
+    </Button>
+    </Grid>
+  </Grid>
+</Window>
